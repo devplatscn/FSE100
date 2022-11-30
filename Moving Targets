@@ -1,0 +1,202 @@
+var button;
+var startBtn;
+var starting;
+var magp=275;
+var ysl=60;
+var  time1=0;
+var score=0;
+//first target
+  var speed1=3;
+  var target1;
+  var x = -50;
+  var y = magp*Math.random()+ysl;
+
+//second target
+  var speed2=4;
+  var target2;
+  var x2 = -50;
+  var y2 = magp*Math.random()+ysl;
+
+//third target
+  var speed3=5;
+  var target3;
+  var x3 = -50;
+  var y3 = magp*Math.random()+ysl;
+
+//fourth target
+  var speed4=6;
+  var target4;
+  var x4 = -50;
+  var y4 = magp*Math.random()+ysl;
+
+
+function setup() {
+  startBtn=createButton("Click me to Start!");
+startBtn.mousePressed(startGame);
+  starting=true;
+  createCanvas(400, 400);
+  background(220);
+    frameRate(30);
+  textSize(30);
+  //setup for first target
+  target1 = createButton('1');
+  target1.position(x,y);
+  target1.size(50,50);
+  target1.style("font-size", "24px");
+  target1.style('background-color',"red");
+  target1.show();
+  
+  //setup for second target
+  target2 = createButton('2');
+  target2.position(x2,y2);
+  target2.size(50,50);
+  target2.style("font-size", "24px");
+  target2.style('background-color',"blue");
+  target2.show();
+  
+  //setup for third target
+  target3 = createButton('3');
+  target3.position(x3,y3);
+  target3.size(50,50);
+  target3.style("font-size", "24px");
+  target3.style('background-color',"yellow");
+  target3.show();
+  
+  //setup for fourth target
+  target4 = createButton('4');
+  target4.position(x4,y4);
+  target4.size(50,50);
+  target4.style("font-size", "24px");
+  target4.style('background-color',"green");
+  target4.show();
+
+}
+function startGame(){
+  starting=false;
+}
+function draw2(){
+  if(score<11){
+  background(200);
+    text((frameCount/30).toFixed(1), 180, 50);
+    text("Time: ",90,50);
+    time1=(frameCount/30).toFixed(1);
+  }
+}
+function draw(){
+if(starting){
+  displayInstructions();
+}
+  else{
+    startBtn.hide();
+  draw2();
+//target1 movement
+if(x>400){
+y = magp*Math.random()+ysl;
+x=-50;
+target1.position(x,y);
+  
+}else{
+    x=x+speed1;
+  target1.position(x,y);
+target1.mousePressed(hideButton1);
+}
+  
+//target2 movement
+if(x2>400){
+y2 = magp*Math.random()+ysl;
+x2=-50;
+target2.position(x2,y2);
+}else{
+      x2=x2+speed2;
+  target2.position(x2,y2);
+target2.mousePressed(hideButton2);
+}
+  
+//target3 movement
+if(x3>410){
+y3 = magp*Math.random()+ysl;
+x3=-50;
+target3.position(x3,y3);
+}else{
+      x3=x3+speed3;
+  target3.position(x3,y3);
+target3.mousePressed(hideButton3);
+}
+  
+//target4 movement
+if(x4>410){
+y4 = magp*Math.random()+ysl;
+x4=-50;
+target4.position(x4,y4);
+}else{
+      x4=x4+speed4;
+  target4.position(x4,y4);
+target4.mousePressed(hideButton4);
+}
+  
+  if(score>10){
+    win();
+  }
+  }
+}
+
+function hideButton1(){
+  score++;
+  y = magp*Math.random()+ysl;
+x=-50;
+target1.position(x,y);
+}
+function hideButton2(){
+  score++;
+  y2 = magp*Math.random()+ysl;
+x2=-50;
+target2.position(x2,y2);
+}
+function hideButton3(){
+  score++;
+  y3 = magp*Math.random()+ysl;
+x3=-50;
+target3.position(x3,y3);
+}
+function hideButton4(){
+  score++;
+  y4 = magp*Math.random()+ysl;
+x4=-50;
+target4.position(x4,y4);
+}
+
+function win() {
+  let col3 = color(232,190,193);
+  background(col3);
+    textSize(75);
+  fill('black');
+  text("You Win!", 50,170);
+  target1.hide();
+  target2.hide();
+  target3.hide();
+  target4.hide();
+  textSize(25);
+  text("Time: ",150,220);
+  text(time1,220,220);
+  button=createButton("Main Menu");
+  button.position(100,300);
+  button.style("font-size", "36px");
+  button.size(200,75);
+  button.mousePressed(runButton);
+}
+function runButton(){
+ window.open("https://editor.p5js.org/snayak25/full/RDTn4mR63");
+}
+
+function displayInstructions(){
+  fill("white");
+  rect(0,0,500,500);
+  fill("black");
+  textSize(12);
+  text("Click the button at the bottom labeled \"Click me to Start!\" to begin.",25,360);
+  text("Click the targets as they move across\n\t\t\t the screen as fast as you can.",90,100);
+  text("The goal is to get 11 points in as little time as possible.",60,135);
+  textSize(25);
+  
+  // startBtn.position(10,380);
+}
